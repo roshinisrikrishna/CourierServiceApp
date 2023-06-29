@@ -63,11 +63,7 @@ app.get('/users', (req, res) => {
    
   });
   
-    app.use(express.static(path.join(__dirname, 'build')));
-
-    app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    });
+   
   app.post('/users/create', (req, res) => {
     const { username, password, email_id, designation } = req.body;
     const sqlInsert = 'INSERT INTO users (id, username, password, email_id, designation) VALUES (?, ?, ?, ?, ?)';
@@ -337,6 +333,12 @@ else
   
   // Schedule the data fetching and storing process to run every hour (adjust as needed)
   // Start the server
+    app.use(express.static(path.join(__dirname, 'build')));
+
+    app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
+
   app.listen(process.env.PORT||5000, () => {
   console.log('Server running on port 5000');
   });
